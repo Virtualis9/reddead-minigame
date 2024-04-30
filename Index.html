@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spinning Wheel</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  @keyframes spin {
+    100% { transform: rotate(360deg); }
+  }
+
+  .container{
+    position: relative;
+
+  }
+
+  .wheel {
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 3s infinite linear;
+    z-index: 2;
+    }
+
+    .line{
+        margin: auto;
+        width: 2px;
+        height: 100px;
+        background-color: black;
+        padding: 5px;
+        transform-origin: center;
+        
+       
+    }
+
+    .target{
+        top: 50px;
+        left: 50px;
+        z-index: 1; 
+
+    }
+
+    .target, .wheel{
+        
+
+    }
+ 
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="target"></div>
+    <div class="wheel">
+        <div class="line"> </div>
+</div>    
+
+</div>
+</body>
+</html>
