@@ -42,21 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function difficultyLevel1() {
         let speed = 0.9 ;
         line.style.animation = "spin " + speed + "s infinite linear";
-        
     }
 
     // Function to change difficulty to medium
     function difficultyLevel2() {
         let speed = 0.8 ;
         line.style.animation = "spin " + speed + "s infinite linear";
-        
     }
     // Function to change difficulty to max
     function difficultyLevel3() {
         let speed = 0.7 ;
         line.style.animation = "spin " + speed + "s infinite linear";
-       
-        
     }
 
     
