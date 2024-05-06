@@ -13,6 +13,10 @@ body {
   }
 }
 
+.colliding {
+  outline: 1px solid red;
+}
+
 .container {
   position: relative;
 }
@@ -42,16 +46,12 @@ body {
 }
 
 .target {
-  margin: auto;
-  width: 0px;
-  height: 0px;
-  border-width: 0 20px 20px 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-  border-bottom: 100px solid rgb(32, 250, 3);
-  rotate: 180deg;
-  z-index: 0;
-  border-style: solid;
+  position: relative;
+  width: 15px;
+  height: 60px;
+  border: none; /* Adjust border radius as needed */
+  rotate: 130deg;
+  z-index: 1;
+  border-style: none;
+  background-color: green;
 }
