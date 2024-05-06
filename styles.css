@@ -13,10 +13,6 @@ body {
   }
 }
 
-.colliding {
-  outline: 1px solid red;
-}
-
 .container {
   position: relative;
 }
@@ -41,7 +37,7 @@ body {
   position: absolute;
   left: 50%;
   bottom: 50%;
-  animation: spin 3s infinite linear;
+  animation: spin 1s infinite linear;
   z-index: 2;
 }
 

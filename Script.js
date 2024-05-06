@@ -1,13 +1,19 @@
+//event listener holding the whole game logic
 document.addEventListener('DOMContentLoaded', function() {
+
+    // veriables that hold the elements id's
     const container = document.querySelector(".container");
     const wheel = document.querySelector(".wheel");
     const target = document.getElementById("target");
     const line = document.getElementById("line");
     
+    //function that gives the detection box
+    //also handles the collision 
     function detectAndHandleCollision() {
 
         const lineRect = line.getBoundingClientRect();
         const targetRect = target.getBoundingClientRect();
+
         if (lineRect.right >= targetRect.left &&
             lineRect.left <= targetRect.right &&
             lineRect.bottom >= targetRect.top &&
@@ -24,66 +30,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
     }
-
-     
-    // // Function to detect collision
-    // function detectCollision(line, target) {
-    //     const rect1 = line.getBoundingClientRect();
-    //     const rect2 = target.getBoundingClientRect();
-    //     const collisionDetected = !(rect1.right < rect2.left || 
-    //              rect1.left > rect2.right || 
-    //              rect1.bottom < rect2.top || 
-    //              rect1.top > rect2.bottom);
-    //              console.log("Collision detected:", collisionDetected); // Log the result
-    //              return collisionDetected;     
-    // }
     
+    //function that moves the wheel in a random 360 degree angle
+    //spinning wheel makes the allusion of the target moving 
     function moveElements() {
         let random = Math.floor(Math.random() * 360);
         wheel.style.transform = "rotate(" + random + "deg)";
-        // console.log(wheel.style.transform);
-        // if(detectCollision(line, target)){
-        //     console.log("collision detected")
-        // }
     }
 
-
-      // Function to change difficulty
-      function difficulty() {
-        let speed = Math.floor(Math.random() * 3) + 1;
+      // Function to change difficulty to easy
+    function difficultyLevel1() {
+        let speed = 0.9 ;
         line.style.animation = "spin " + speed + "s infinite linear";
-        console.log(line.style.animation);
-        console.log(speed);
+        
     }
+
+    // Function to change difficulty to medium
+    function difficultyLevel2() {
+        let speed = 0.8 ;
+        line.style.animation = "spin " + speed + "s infinite linear";
+        
+    }
+    // Function to change difficulty to max
+    function difficultyLevel3() {
+        let speed = 0.7 ;
+        line.style.animation = "spin " + speed + "s infinite linear";
+       
+        
+    }
+
     
+    //variable that starts the array at index 0
+    let currentDifficultyIndex = 0;
+
+    // array storing difficulty levels
+    const difficultylevels = [difficultyLevel1, difficultyLevel2, difficultyLevel3, youWin]
+
     //logic for hit or miss
-    document.addEventListener('keydown', function(event) {
+    const hitOrMiss = document.addEventListener('keydown', function(event) {
         detectAndHandleCollision();
         if (event.key === 'e' && detectAndHandleCollision() === true) {
-            console.log('hit');
             moveElements();
-            difficulty();
-            
+            increasedDifficultyLevel()
         }else {
-            console.log("missed")
             gameOver()
         }
     });
 
-  
+    //function that runs through difficulty array
+    function increasedDifficultyLevel(){
+    currentDifficultyIndex++;
+    if (currentDifficultyIndex < difficultylevels.length) {
+        difficultylevels[currentDifficultyIndex]();
+    } else {
+        currentDifficultyIndex = 0;
+        cancelAnimationFrame(animationFrameId)
+    }
 
+    }
+
+    //function that alerts you win
+    function youWin(){
+        alert("you win")
+        cancelAnimationFrame(animationFrameId)
+    }
+
+    //function that alerts you lose
     function gameOver(){
         alert("you lose")
-
-
+        cancelAnimationFrame(animationFrameId)
     }
 
+    //function that keeps the game updating 
     function update() {
-       
         detectAndHandleCollision(); // Detect and handle collision
-        requestAnimationFrame(update); // Schedule the next update
+        animationFrameId = requestAnimationFrame(update); // Schedule the next update
     }
-    
+
     // Start the update loop
     update();
 
